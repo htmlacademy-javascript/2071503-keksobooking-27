@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Vladislav Frost](https://up.htmlacademy.ru/javascript/27/user/2071503).
-* Наставник: `Неизвестно`.
+* Наставник: [Иван Долгов](https://htmlacademy.ru/profile/id2047221).
 
 ---
 
