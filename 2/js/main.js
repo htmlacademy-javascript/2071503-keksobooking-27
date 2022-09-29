@@ -5,7 +5,7 @@ function getRandomNumber(min, max) {
   }
 
   if (min < 0 || max < 0) {
-    return NaN;
+    throw new RangeError('minimum or maximum value must be positive or 0');
   }
 
   return Math.round(min + Math.random() * (max - min));
@@ -14,18 +14,20 @@ function getRandomNumber(min, max) {
 getRandomNumber(1, 10);
 
 
-function getRandomFractionNumber(min, max) {
+function getRandomFractionNumber(min, max, numberSymbols) {
   if (max < min) {
     [min, max] = [max, min];
   }
 
   if (min < 0 || max < 0) {
-    return NaN;
+    throw new RangeError('minimum or maximum value must be positive or 0');
   }
 
   const randomNumber = min + Math.random() * (max - min);
 
-  return randomNumber.toFixed(1);
+  return Number(randomNumber.toFixed(1 * numberSymbols));
 }
 
-getRandomFractionNumber(1, 10);
+getRandomFractionNumber(1, 10, 2);
+
+
