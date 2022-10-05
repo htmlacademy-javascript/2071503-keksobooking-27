@@ -11,9 +11,6 @@ function getRandomNumber(min, max) {
   return Math.round(min + Math.random() * (max - min));
 }
 
-getRandomNumber(1, 10);
-
-
 function getRandomFractionNumber(min, max, numberSymbols) {
   if (max < min) {
     [min, max] = [max, min];
@@ -28,26 +25,41 @@ function getRandomFractionNumber(min, max, numberSymbols) {
   return Number(randomNumber.toFixed(numberSymbols));
 }
 
-getRandomFractionNumber(1, 10, 0);
+
+const AVATAR_COUNTS = 10;
+const OFFER_MIN_GUEST_COUNT = 1;
+const OFFER_MAX_GUEST_COUNT = 10;
+const OFFER_MIN_ROOM_COUNT = 1;
+const OFFER_MAX_ROOM_COUNT = 5;
+const OFFER_MIN_PRICE = 200;
+const OFFER_MAX_PRICE = 10000;
+const SIMULATION_ARRAY_DATA_COUNT = 10;
+const CHECKIN_AND_CHECKOUT_MIN_COUNT = 12;
+const CHECKIN_AND_CHECKOUT_MAX_COUNT = 14;
+
+
+// Массивы с рандомными данными
+const OFFER_TITLES = ['Квартира в центре Питера', 'Квартира в центре Москвы', 'Квартира в центре Сочи'];
+const OFFER_TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const OFFER_DESCRIPTIONS = ['Все отлично', 'Все плохо'];
+const OFFER_PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
 
 // Возвращает фотографию пользователя
-const AVATAR_COUNTS = 10;
-
 function getAvatarUrl () {
-  const randomNumber = getRandomFractionNumber(1, AVATAR_COUNTS, 0);
+  const randomAvatarId = getRandomNumber(1, AVATAR_COUNTS);
 
-  let AvatarUrl = 'img/avatars/userget' + `0${ randomNumber }.png`;
-  if (randomNumber === 10) {
-    AvatarUrl = 'img/avatars/userget' + `${ randomNumber }.png`;
-  }
+  const AvatarUrl = `img/avatars/userget${ String(randomAvatarId).padStart(2,0) }.png`;
 
   return AvatarUrl;
 }
 
 const avatarArray = [];
 
-function getavatarValue () {
+function getAvatarValue () {
   let nextValue;
   while (avatarArray.length < AVATAR_COUNTS) {
     nextValue = getAvatarUrl();
@@ -57,54 +69,54 @@ function getavatarValue () {
     }
   }
 }
+// Расчет координат
+function CALCULATION_LAT (){return(Math.random() + 35).toFixed(5);}
+function CALCULATION_LNG (){return(Math.random() + 139).toFixed(5);}
 
-const createAvatarArray = Array.from({length: 10}, getavatarValue);
-
-
-// возвращает время заезда и выезда
-function getCheckinAndCheckout () {
-  const randomNumber = getRandomFractionNumber(12, 14, 0);
-  const checkinAndCheckout = `${ randomNumber }` + ':00';
+// Возвращает время заезда и выезда
+function getTimeCheckinAndCheckout () {
+  const randomTimeCheckinAndCheckout = getRandomNumber(CHECKIN_AND_CHECKOUT_MIN_COUNT, CHECKIN_AND_CHECKOUT_MAX_COUNT);
+  const checkinAndCheckout = `${ randomTimeCheckinAndCheckout }:00`;
   return checkinAndCheckout;
 }
 
-// Массивы с рандомными данными
-const title = ['Квартира в центре Питера', 'Квартира в центре Москвы', 'Квартира в центре Сочи'];
-const type = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const description = ['Все отлично', 'Все плохо'];
-const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
-const calculationLat = (Math.random() + 35).toFixed(5);
-const calculationLng = (Math.random() + 139).toFixed(5);
-
 // Возвращает случайные элементы массива
-const getRandomRiver = (arr) => arr.sort(() => 0.5 - Math.random()).slice(0, getRandomNumber(1, arr.length));
+function getRandomArrayItem (arr){
+  const randomArrayItem = arr.sort(() => 0.5 - Math.random()).slice(0, getRandomNumber(1, arr.length));
+  return randomArrayItem;
+}
 
-const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
+// Возвращает случайный элемент массива
+function getRandomArrayElement (elements) {
+  const randomArrayElement = elements[getRandomNumber(0, elements.length - 1)];
+  return randomArrayElement;
+}
 
-const createData = () => ({
-  author: {
-    avatar: createAvatarArray.splice(0, 1)
-  },
-  offer: {
-    title: getRandomArrayElement(title),
-    address: `${ calculationLat }, ` + ` ${ calculationLng }`,
-    price: getRandomFractionNumber(200, 10000, 0),
-    type: getRandomArrayElement(type),
-    rooms: getRandomFractionNumber(1, 5, 0),
-    guests: getRandomFractionNumber(1, 10, 0),
-    checkin: getCheckinAndCheckout (),
-    checkout: getCheckinAndCheckout (),
-    features: getRandomRiver(features),
-    description: getRandomArrayElement(description),
-    photos: getRandomRiver(photos),
-  },
-  location: {
-    lat: calculationLat,
-    lng: calculationLng
-  }
-});
 
-const simulationArrayData = Array.from({length: 10}, createData);
+const createData = function () {
+  const LOCATION_STORAGE = { lat: CALCULATION_LAT (), lng: CALCULATION_LNG () };
+  return {
+    author: {
+      avatar: getAvatarValue ()
+    },
+    offer: {
+      title: getRandomArrayElement(OFFER_TITLES),
+      address: LOCATION_STORAGE,
+      price: getRandomFractionNumber(OFFER_MIN_PRICE, OFFER_MAX_PRICE, 0),
+      type: getRandomArrayElement(OFFER_TYPES),
+      rooms: getRandomNumber(OFFER_MIN_ROOM_COUNT, OFFER_MAX_ROOM_COUNT),
+      guests: getRandomNumber(OFFER_MIN_GUEST_COUNT, OFFER_MAX_GUEST_COUNT),
+      checkin: getTimeCheckinAndCheckout (),
+      checkout: getTimeCheckinAndCheckout (),
+      features: getRandomArrayItem(OFFER_FEATURES),
+      description: getRandomArrayElement(OFFER_DESCRIPTIONS),
+      photos: getRandomArrayItem(OFFER_PHOTOS)
+    },
+    location: {
+      lat: LOCATION_STORAGE.lat,
+      lng: LOCATION_STORAGE.lng
+    }
+  };
+};
+
+Array.from({length: SIMULATION_ARRAY_DATA_COUNT}, createData);
