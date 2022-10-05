@@ -51,10 +51,7 @@ const OFFER_PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascrip
 // Возвращает фотографию пользователя
 function getAvatarUrl () {
   const randomAvatarId = getRandomNumber(1, AVATAR_COUNTS);
-
-  const AvatarUrl = `img/avatars/userget${ String(randomAvatarId).padStart(2,0) }.png`;
-
-  return AvatarUrl;
+  return `img/avatars/userget${ String(randomAvatarId).padStart(2,0) }.png`;
 }
 
 const avatarArray = [];
@@ -70,52 +67,46 @@ function getAvatarValue () {
   }
 }
 // Расчет координат
-function CALCULATION_LAT (){return(Math.random() + 35).toFixed(5);}
-function CALCULATION_LNG (){return(Math.random() + 139).toFixed(5);}
+function CALCULATION_LAT (){return getRandomFractionNumber(35.65000, 35.70000, 5);}
+function CALCULATION_LNG (){return getRandomFractionNumber(139.65000, 139.70000, 5);}
 
 // Возвращает время заезда и выезда
 function getTimeCheckinAndCheckout () {
   const randomTimeCheckinAndCheckout = getRandomNumber(CHECKIN_AND_CHECKOUT_MIN_COUNT, CHECKIN_AND_CHECKOUT_MAX_COUNT);
-  const checkinAndCheckout = `${ randomTimeCheckinAndCheckout }:00`;
-  return checkinAndCheckout;
+  return `${ randomTimeCheckinAndCheckout }:00`;
 }
 
 // Возвращает случайные элементы массива
-function getRandomArrayItem (arr){
-  const randomArrayItem = arr.sort(() => 0.5 - Math.random()).slice(0, getRandomNumber(1, arr.length));
-  return randomArrayItem;
+function getRandomArrayElements (arr){
+  return arr.sort(() => 0.5 - Math.random()).slice(0, getRandomNumber(1, arr.length));
 }
 
 // Возвращает случайный элемент массива
 function getRandomArrayElement (elements) {
-  const randomArrayElement = elements[getRandomNumber(0, elements.length - 1)];
-  return randomArrayElement;
+  return elements[getRandomNumber(0, elements.length - 1)];
 }
 
 
 const createData = function () {
-  const LOCATION_STORAGE = { lat: CALCULATION_LAT (), lng: CALCULATION_LNG () };
+  const location = { lat: CALCULATION_LAT (), lng: CALCULATION_LNG () };
   return {
     author: {
       avatar: getAvatarValue ()
     },
     offer: {
       title: getRandomArrayElement(OFFER_TITLES),
-      address: LOCATION_STORAGE,
-      price: getRandomFractionNumber(OFFER_MIN_PRICE, OFFER_MAX_PRICE, 0),
+      address: `${location.lat}, ${location.lng}`,
+      price: getRandomNumber(OFFER_MIN_PRICE, OFFER_MAX_PRICE),
       type: getRandomArrayElement(OFFER_TYPES),
       rooms: getRandomNumber(OFFER_MIN_ROOM_COUNT, OFFER_MAX_ROOM_COUNT),
       guests: getRandomNumber(OFFER_MIN_GUEST_COUNT, OFFER_MAX_GUEST_COUNT),
       checkin: getTimeCheckinAndCheckout (),
       checkout: getTimeCheckinAndCheckout (),
-      features: getRandomArrayItem(OFFER_FEATURES),
+      features: getRandomArrayElements(OFFER_FEATURES),
       description: getRandomArrayElement(OFFER_DESCRIPTIONS),
-      photos: getRandomArrayItem(OFFER_PHOTOS)
+      photos: getRandomArrayElements(OFFER_PHOTOS)
     },
-    location: {
-      lat: LOCATION_STORAGE.lat,
-      lng: LOCATION_STORAGE.lng
-    }
+    location
   };
 };
 
