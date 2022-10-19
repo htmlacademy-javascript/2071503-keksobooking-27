@@ -7,7 +7,7 @@ const OFFER_MIN_ROOM_COUNT = 1;
 const OFFER_MAX_ROOM_COUNT = 5;
 const OFFER_MIN_PRICE = 200;
 const OFFER_MAX_PRICE = 10000;
-const SIMULATION_ARRAY_DATA_COUNT = 10;
+const SIMULATION_ARRAY_DATA_COUNT = 2;
 const CHECKIN_AND_CHECKOUT_MIN_COUNT = 12;
 const CHECKIN_AND_CHECKOUT_MAX_COUNT = 14;
 
@@ -16,7 +16,7 @@ const CHECKIN_AND_CHECKOUT_MAX_COUNT = 14;
 const OFFER_TITLES = ['Квартира в центре Питера', 'Квартира в центре Москвы', 'Квартира в центре Сочи'];
 const OFFER_TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const OFFER_DESCRIPTIONS = ['Все отлично', 'Все плохо'];
+const OFFER_DESCRIPTIONS = ['Отличная квартира', 'Хорошая квартира'];
 const OFFER_PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
@@ -25,7 +25,7 @@ const OFFER_PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascrip
 // Возвращает фотографию пользователя
 function getAvatarUrl () {
   const randomAvatarId = getRandomNumber(1, AVATAR_COUNTS);
-  return `img/avatars/userget${ String(randomAvatarId).padStart(2,0) }.png`;
+  return `img/avatars/user${ String(randomAvatarId).padStart(2,0) }.png`;
 }
 
 const avatarArray = [];
@@ -74,5 +74,4 @@ const createData = function () {
 };
 
 const createArrayData = function () {return Array.from({length: SIMULATION_ARRAY_DATA_COUNT}, createData);};
-
-export {createArrayData};
+export {createArrayData, createData};
