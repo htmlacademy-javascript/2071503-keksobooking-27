@@ -28,14 +28,14 @@ function getAvatarUrl () {
   return `img/avatars/user${ String(randomAvatarId).padStart(2,0) }.png`;
 }
 
-const avatarArray = [];
+const avatars = [];
 
 function getAvatarValue () {
   let nextValue;
-  while (avatarArray.length < AVATAR_COUNTS) {
+  while (avatars.length < AVATAR_COUNTS) {
     nextValue = getAvatarUrl();
-    if(!avatarArray.includes(nextValue))
-    {avatarArray.push(nextValue);
+    if(!avatars.includes(nextValue))
+    {avatars.push(nextValue);
       return nextValue;
     }
   }
@@ -50,7 +50,7 @@ function getTimeCheckinAndCheckout () {
   return `${ randomTimeCheckinAndCheckout }:00`;
 }
 
-const createData = function () {
+function createOferData () {
   const location = { lat: CALCULATION_LAT (), lng: CALCULATION_LNG () };
   return {
     author: {
@@ -71,7 +71,8 @@ const createData = function () {
     },
     location
   };
-};
+}
 
-const createArrayData = function () {return Array.from({length: SIMULATION_ARRAY_DATA_COUNT}, createData);};
-export {createArrayData, createData};
+function createOffers () {return Array.from({length: SIMULATION_ARRAY_DATA_COUNT}, createOferData);}
+
+export {createOffers, createOferData};
