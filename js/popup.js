@@ -25,13 +25,13 @@ function createPopup (user) {
 
   const capacity = popupTemplateClone.querySelector('.popup__text--capacity');
   capacity.textContent = `${user.offer.rooms} комнаты для ${user.offer.guests} гостей`;
-  if (user.offer.rooms.length === 0 || user.offer.guests.length === 0) {
+  if (!user.offer.rooms || !user.offer.guests) {
     capacity.remove();
   }
 
   const time = popupTemplateClone.querySelector('.popup__text--time');
   time.textContent = `Заезд после ${user.offer.checkin}, выезд до ${user.offer.checkout}`;
-  if (user.offer.checkin.length === 0 || user.offer.checkout === 0) {
+  if (!user.offer.checkin || !user.offer.checkout) {
     time.remove();
   }
 
@@ -59,13 +59,11 @@ function createPopup (user) {
 
   imgContainer.innerHTML = '';
 
-  // Проверка наличия адреса и добавление фото
-  if (photos) {
-    photos.forEach((phohtoUrl) => {
-      const regularPhotoClone = photoClone.cloneNode(true);
-      regularPhotoClone.src = phohtoUrl;
-      imgContainer.appendChild(regularPhotoClone);
-    });} else {imgContainer.innerHTML = '';}
+  photos?.forEach((phohtoUrl) => {
+    const regularPhotoClone = photoClone.cloneNode(true);
+    regularPhotoClone.src = phohtoUrl;
+    imgContainer.appendChild(regularPhotoClone);
+  });
 
   return popupTemplateClone;
 }
