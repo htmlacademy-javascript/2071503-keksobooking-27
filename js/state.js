@@ -5,30 +5,37 @@ const filterForm = document.querySelector('.map__filters');
 const filterFormElement = filterForm.querySelectorAll('select, fieldset');
 
 
-function disableForm () {
+function disableСreateForm () {
   createForm.classList.add('ad-form--disabled');
+
+  createFormElement.forEach((element) => {
+    element.disabled = true;
+  });
+}
+
+function disableFilterForm () {
   filterForm.classList.add('map__filters--disabled');
 
-  createFormElement.forEach((element) => {
-    element.disabled = true;
-  });
-
   filterFormElement.forEach((element) => {
     element.disabled = true;
   });
 }
 
-function enableForm () {
+
+function enableСreateForm () {
   createForm.classList.remove('ad-form--disabled');
+
+  createFormElement.forEach((element) => {
+    element.disabled = false;
+  });
+}
+
+function enableFilterForm () {
   filterForm.classList.remove('map__filters--disabled');
 
-  createFormElement.forEach((element) => {
-    element.disabled = false;
-  });
-
   filterFormElement.forEach((element) => {
     element.disabled = false;
   });
 }
 
-export {disableForm, enableForm};
+export {disableСreateForm, disableFilterForm, enableСreateForm, enableFilterForm};
