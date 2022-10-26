@@ -4,6 +4,8 @@ import {createPopup} from './popup.js';
 
 import {disableAdForm, disableFilterForm, enableAdForm, enableFilterForm} from './state.js';
 
+import './ad-form.js';
+
 const map = document.querySelector('.map__canvas');
 
 const offers = createOffers();
