@@ -5,7 +5,7 @@ const filterForm = document.querySelector('.map__filters');
 const filterFormElement = filterForm.querySelectorAll('select, fieldset');
 
 
-function disableCreateForm () {
+function disableAdForm () {
   createForm.classList.add('ad-form--disabled');
 
   createFormElement.forEach((element) => {
@@ -22,7 +22,7 @@ function disableFilterForm () {
 }
 
 
-function enableCreateForm () {
+function enableAdForm () {
   createForm.classList.remove('ad-form--disabled');
 
   createFormElement.forEach((element) => {
@@ -38,4 +38,4 @@ function enableFilterForm () {
   });
 }
 
-export {disableCreateForm, disableFilterForm, enableCreateForm, enableFilterForm};
+export {disableAdForm, disableFilterForm, enableAdForm, enableFilterForm};
