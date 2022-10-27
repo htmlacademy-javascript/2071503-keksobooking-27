@@ -4,7 +4,7 @@ import {createPopup} from './popup.js';
 
 import {disableAdForm, disableFilterForm, enableAdForm, enableFilterForm} from './state.js';
 
-import './ad-form.js';
+import {initValidation} from './ad-form.js';
 
 const map = document.querySelector('.map__canvas');
 
@@ -16,5 +16,6 @@ disableAdForm ();
 disableFilterForm ();
 
 enableAdForm ();
+initValidation();
 enableFilterForm ();
-// проверка
+
