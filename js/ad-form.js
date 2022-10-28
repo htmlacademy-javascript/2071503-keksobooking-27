@@ -72,6 +72,16 @@ function initValidation () {
 
   pristine.addValidator(price, validatePrise, getErrorMessagePrise);
 
+  // Время заезда - выезда
+  const timein = adForm.querySelector('#timein');
+  const timeout = adForm.querySelector('#timeout');
+  const timeinAndTimeout = adForm.querySelector('.ad-form__element--time');
+
+  timeinAndTimeout.addEventListener('change', (evt) => {
+    if (evt.target.value) {
+      timeout.value = timein.value = evt.target.value;
+    }
+  });
 
   adForm.addEventListener('submit', (evt) => {
     if (!pristine.validate()){
@@ -80,3 +90,5 @@ function initValidation () {
   });
 }
 export {initValidation};
+
+
