@@ -1,16 +1,14 @@
 import {createOffers} from './data.js';
 
-import {createPopup} from './popup.js';
-
 import {disableAdForm, disableFilterForm, enableAdForm, enableFilterForm} from './state.js';
 
 import {initValidation} from './ad-form.js';
 
-const map = document.querySelector('.map__canvas');
+import {createMarker} from './map.js';
 
 const offers = createOffers();
 
-offers.forEach((offer) => map.append(createPopup(offer)));
+createMarker(offers);
 
 disableAdForm ();
 disableFilterForm ();

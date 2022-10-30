@@ -69,5 +69,3 @@ function createPopup (user) {
 }
 
 export {createPopup};
-
-
