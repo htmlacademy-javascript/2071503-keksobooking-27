@@ -15,6 +15,9 @@ const ROOM_NUMBER_OPTIONS = {
 
 const adForm = document.querySelector('.ad-form');
 
+const typeHousing = adForm.querySelector('[name="type"]');
+const price = adForm.querySelector('[name="price"]');
+
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
   errorTextParent: 'ad-form__element',
@@ -49,8 +52,6 @@ function initValidation () {
 
 
   // Цена за жилье
-  const typeHousing = adForm.querySelector('[name="type"]');
-  const price = adForm.querySelector('[name="price"]');
 
   typeHousing.addEventListener('change', () => {
     price.placeholder = TYPE_HOUSING_OPTIONS[typeHousing.value];
@@ -89,6 +90,6 @@ function initValidation () {
     }
   });
 }
-export {initValidation};
+export {initValidation, TYPE_HOUSING_OPTIONS, typeHousing};
 
 

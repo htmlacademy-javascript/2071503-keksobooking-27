@@ -1,5 +1,5 @@
 // Настройка карты leaflet
-const resetButton = document.querySelector('.ad-form__reset');
+
 // Создание карты
 const map = L.map('map-canvas')
   .setView({
@@ -42,6 +42,8 @@ function createMainMarker () {
   mainPinMarker.on('moveend', (evt) => {
     evt.target.getLatLng();
   });
+
+  const resetButton = document.querySelector('.ad-form__reset');
 
   // Вернуть масштаб и положение метки
   resetButton.addEventListener('click', () => {
