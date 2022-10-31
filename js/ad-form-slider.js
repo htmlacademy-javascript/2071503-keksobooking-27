@@ -1,11 +1,11 @@
 // Настройка слайдера
 import {TYPE_HOUSING_OPTIONS, typeHousing} from './ad-form.js';
 
-
 const sliderElement = document.querySelector('.ad-form__slider');
 const price = document.querySelector('#price');
 
-function createSlider() {
+function createSlider(checkValidation) {
+
   noUiSlider.create(sliderElement, {
     range: {
       min: 0,
@@ -26,6 +26,7 @@ function createSlider() {
 
   sliderElement.noUiSlider.on('slide' , () => {
     price.value = sliderElement.noUiSlider.get();
+    checkValidation(price);
   });
 
   // Изменение минимального значения слайдера
