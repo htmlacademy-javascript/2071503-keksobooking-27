@@ -4,9 +4,6 @@ import {disableAdForm, disableFilterForm, enableAdForm, enableFilterForm} from '
 
 import {initValidation} from './ad-form.js';
 
-import {createSlider} from './no-ui-slider.js';
-createSlider ();
-
 import {createMarker} from './map.js';
 const offers = createOffers();
 
@@ -16,6 +13,8 @@ disableAdForm ();
 disableFilterForm ();
 
 enableAdForm ();
+
 initValidation();
+
 enableFilterForm ();
 

@@ -1,5 +1,5 @@
 // Настройка карты leaflet
-
+const ROUND_COORDINATE = 5;
 // Создание карты
 const map = L.map('map-canvas')
   .setView({
@@ -17,7 +17,7 @@ L.tileLayer(
 ).addTo(map);
 
 // Отрисовка главной метки выбора адреса
-function createMainMarker () {
+function createMainMarker (checkValidation) {
   const mainPinIcon = L.icon({
     iconUrl: './img/main-pin.svg',
     iconSize: [52, 52],
@@ -38,12 +38,24 @@ function createMainMarker () {
 
   mainPinMarker.addTo(map);
 
-  // Фиксирование координат главной метки
+  // Фиксирование координат главной метки и передача в поле адреса
+  const address = document.querySelector('#address');
+
+  function getAddressCoordinates (coordinates) {
+    address.value = `lat: ${(coordinates.lat).toFixed(ROUND_COORDINATE)}, lng: ${(coordinates.lng).toFixed(ROUND_COORDINATE )}`;
+  }
+
   mainPinMarker.on('moveend', (evt) => {
-    evt.target.getLatLng();
+    const point = evt.target.getLatLng();
+    getAddressCoordinates (point);
   });
 
   const resetButton = document.querySelector('.ad-form__reset');
+
+  mainPinMarker.on('change', () => {
+    checkValidation(address);
+  });
+
 
   // Вернуть масштаб и положение метки
   resetButton.addEventListener('click', () => {
