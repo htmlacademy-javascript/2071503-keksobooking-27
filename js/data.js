@@ -7,13 +7,13 @@ const OFFER_MIN_ROOM_COUNT = 1;
 const OFFER_MAX_ROOM_COUNT = 5;
 const OFFER_MIN_PRICE = 200;
 const OFFER_MAX_PRICE = 10000;
-const SIMULATION_ARRAY_DATA_COUNT = 2;
+const SIMULATION_ARRAY_DATA_COUNT = 5;
 const CHECKIN_AND_CHECKOUT_MIN_COUNT = 12;
 const CHECKIN_AND_CHECKOUT_MAX_COUNT = 14;
 
 
 // Массивы с рандомными данными
-const OFFER_TITLES = ['Квартира в центре Питера', 'Квартира в центре Москвы', 'Квартира в центре Сочи'];
+const OFFER_TITLES = ['Жилье отличного качества', 'Жилье хорошего качества', 'Жилье удовлетворительно качества', 'Так себе Жилье'];
 const OFFER_TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const OFFER_DESCRIPTIONS = ['Отличная квартира', 'Хорошая квартира'];

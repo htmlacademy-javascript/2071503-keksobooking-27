@@ -13,7 +13,11 @@ const ROOM_NUMBER_OPTIONS = {
   '100' : '0',
 };
 
+import {createSlider} from './ad-form-slider.js';
+
 const adForm = document.querySelector('.ad-form');
+const typeHousing = adForm.querySelector('[name="type"]');
+const price = adForm.querySelector('[name="price"]');
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
@@ -49,15 +53,6 @@ function initValidation () {
 
 
   // Цена за жилье
-  const typeHousing = adForm.querySelector('[name="type"]');
-  const price = adForm.querySelector('[name="price"]');
-
-  typeHousing.addEventListener('change', () => {
-    price.placeholder = TYPE_HOUSING_OPTIONS[typeHousing.value];
-
-    pristine.validate(price);
-  });
-
   function validatePrise (value) {
     const cost = parseInt(value, 10);
     const minPrice = TYPE_HOUSING_OPTIONS[typeHousing.value] || 0;
@@ -71,6 +66,21 @@ function initValidation () {
   }
 
   pristine.addValidator(price, validatePrise, getErrorMessagePrise);
+
+  typeHousing.addEventListener('change', () => {
+    price.placeholder = TYPE_HOUSING_OPTIONS[typeHousing.value];
+    pristine.validate(price);
+  });
+
+  /*-----------------------слайдер-------------------------*/
+  const {setValue, setSlideEventInpu} = createSlider (pristine.validate);
+
+  setSlideEventInpu(price);
+
+  price.addEventListener ('change', () => {
+    setValue (price.value);
+  });
+  /*------------------------------------------------*/
 
   // Время заезда - выезда
   const timein = adForm.querySelector('#timein');
@@ -89,6 +99,5 @@ function initValidation () {
     }
   });
 }
-export {initValidation};
 
-
+export {initValidation, TYPE_HOUSING_OPTIONS, typeHousing};
