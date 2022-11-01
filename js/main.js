@@ -13,6 +13,8 @@ disableAdForm ();
 disableFilterForm ();
 
 enableAdForm ();
+
 initValidation();
+
 enableFilterForm ();
 

@@ -15,9 +15,7 @@ const ROOM_NUMBER_OPTIONS = {
 
 import {createSlider} from './ad-form-slider.js';
 
-
 const adForm = document.querySelector('.ad-form');
-
 const typeHousing = adForm.querySelector('[name="type"]');
 const price = adForm.querySelector('[name="price"]');
 
@@ -74,7 +72,15 @@ function initValidation () {
     pristine.validate(price);
   });
 
-  createSlider (pristine.validate);
+  /*-----------------------слайдер-------------------------*/
+  const {setValue, setSlideEventInpu} = createSlider (pristine.validate);
+
+  setSlideEventInpu(price);
+
+  price.addEventListener ('change', () => {
+    setValue (price.value);
+  });
+  /*------------------------------------------------*/
 
   // Время заезда - выезда
   const timein = adForm.querySelector('#timein');
@@ -95,5 +101,3 @@ function initValidation () {
 }
 
 export {initValidation, TYPE_HOUSING_OPTIONS, typeHousing};
-
-

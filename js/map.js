@@ -17,7 +17,7 @@ L.tileLayer(
 ).addTo(map);
 
 // Отрисовка главной метки выбора адреса
-function createMainMarker () {
+function createMainMarker (checkValidation) {
   const mainPinIcon = L.icon({
     iconUrl: './img/main-pin.svg',
     iconSize: [52, 52],
@@ -51,6 +51,11 @@ function createMainMarker () {
   });
 
   const resetButton = document.querySelector('.ad-form__reset');
+
+  mainPinMarker.on('change', () => {
+    checkValidation(address);
+  });
+
 
   // Вернуть масштаб и положение метки
   resetButton.addEventListener('click', () => {

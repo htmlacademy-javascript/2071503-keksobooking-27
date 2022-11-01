@@ -2,7 +2,6 @@
 import {TYPE_HOUSING_OPTIONS, typeHousing} from './ad-form.js';
 
 const sliderElement = document.querySelector('.ad-form__slider');
-const price = document.querySelector('#price');
 
 function createSlider(checkValidation) {
 
@@ -24,10 +23,17 @@ function createSlider(checkValidation) {
     },
   });
 
-  sliderElement.noUiSlider.on('slide' , () => {
-    price.value = sliderElement.noUiSlider.get();
-    checkValidation(price);
-  });
+  // Синхронизация поля ввода и слайдера
+  function setSlideEventInpu (price) {
+    sliderElement.noUiSlider.on('slide' , () => {
+      price.value = sliderElement.noUiSlider.get();
+      checkValidation(price);
+    });
+  }
+
+  function setValue (value) {
+    sliderElement.noUiSlider.set(value);
+  }
 
   // Изменение минимального значения слайдера
   typeHousing.addEventListener('change', (evt) => {
@@ -77,6 +83,9 @@ function createSlider(checkValidation) {
       });
     }
   });
+
+  return {setValue, setSlideEventInpu};
 }
+
 
 export {createSlider};
