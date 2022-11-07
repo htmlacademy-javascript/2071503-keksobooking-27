@@ -34,4 +34,4 @@ function getRandomArrayElement (elements) {
   return elements[getRandomNumber(0, elements.length - 1)];
 }
 
-export {getRandomNumber, getRandomFractionNumber, getRandomArrayElements, getRandomArrayElement};
+export {getRandomNumber, getRandomFractionNumber, getRandomArrayElements, getRandomArrayElement,};

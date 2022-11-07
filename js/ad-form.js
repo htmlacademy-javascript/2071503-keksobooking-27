@@ -25,6 +25,7 @@ const pristine = new Pristine(adForm, {
 });
 
 function initValidation () {
+
   // количество комнот - жильцов
   const roomNumber = adForm.querySelector('[name="rooms"]');
   const capacity = adForm.querySelector('[name="capacity"]');
@@ -93,11 +94,85 @@ function initValidation () {
     }
   });
 
-  adForm.addEventListener('submit', (evt) => {
-    if (!pristine.validate()){
+  // Отправка данных
+  const successTemplate = document.querySelector('#success').content;
+  const successMassage = successTemplate.querySelector('.success');
+  const errorTemplate = document.querySelector('#error').content;
+  const errorMassage = errorTemplate.querySelector('.success');
+  const submitButton = adForm.querySelector('.ad-form__submit');
+  const isEscapeKey = (evt) => evt.key === 'Escape';
+
+  function onSuccessMassageEscKeydown (evt) {
+    if (isEscapeKey(evt)) {
       evt.preventDefault();
+      successMassage.classList.add('hidden');
     }
-  });
+  }
+
+  function onErrorMassageEscKeydown (evt) {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      errorMassage.classList.add('hidden');
+    }
+  }
+
+  function getSuccessMassage () {
+    document.body.append(successMassage);
+    document.addEventListener('keydown', onSuccessMassageEscKeydown);
+    document.addEventListener('click', () => {
+      successMassage.classList.add('hidden');
+    });
+  }
+
+  function getErrorMassage () {
+    document.body.append(errorMassage);
+    document.addEventListener('keydown', onErrorMassageEscKeydown);
+    document.addEventListener('click', () => {
+      successMassage.classList.add('hidden');
+    });
+  }
+
+  const blockSubmitButton = () => {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Публикую...';
+  };
+
+  const unblockSubmitButton = () => {
+    submitButton.disabled = false;
+    submitButton.textContent = 'Опубликовать';
+  };
+
+
+  function setUserFormSubmit () {
+    adForm.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+
+      const isValid = pristine.validate();
+      if (isValid){
+        blockSubmitButton ();
+        const formData = new FormData(evt.target);
+
+        fetch(
+          'https://27.javascript.pages.academy/keksobooking',
+          {
+            method: 'POST',
+            body: formData,
+          },
+        ).then((response) => {
+          if (response.ok) {
+            unblockSubmitButton ();
+            getSuccessMassage ();
+            adForm.reset();
+          } else {
+            unblockSubmitButton ();
+            getErrorMassage ();
+          }
+        });
+      }
+    });
+  }
+
+  return {setUserFormSubmit};
 }
 
 export {initValidation, TYPE_HOUSING_OPTIONS, typeHousing};
