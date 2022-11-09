@@ -1,9 +1,7 @@
 // Настройка слайдера
-import {TYPE_HOUSING_OPTIONS, typeHousing} from './ad-form.js';
-
 const sliderElement = document.querySelector('.ad-form__slider');
 
-function createSlider(checkValidation) {
+function createSlider(typeHousing, checkValidation, TYPE_HOUSING_OPTIONS) {
 
   noUiSlider.create(sliderElement, {
     range: {
@@ -24,7 +22,7 @@ function createSlider(checkValidation) {
   });
 
   // Синхронизация поля ввода и слайдера
-  function setSlideEventInpu (price) {
+  function setSlideEventInput (price) {
     sliderElement.noUiSlider.on('slide' , () => {
       price.value = sliderElement.noUiSlider.get();
       checkValidation(price);
@@ -84,7 +82,7 @@ function createSlider(checkValidation) {
     }
   });
 
-  return {setValue, setSlideEventInpu};
+  return {setValue, setSlideEventInput};
 }
 
 
