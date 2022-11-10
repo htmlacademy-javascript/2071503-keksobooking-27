@@ -1,20 +1,28 @@
-import {createOffers} from './data.js';
 
 import {disableAdForm, disableFilterForm, enableAdForm, enableFilterForm} from './state.js';
 
-import {initValidation} from './ad-form.js';
+import {initAdForm} from './ad-form.js';
 
-import {createMarker} from './map.js';
-const offers = createOffers();
+import {createMap} from './map.js';
 
-createMarker(offers);
+import {getData} from './server.js';
+
+const SIMILAR_OFFERS_COUNT = 10;
 
 disableAdForm ();
 disableFilterForm ();
 
-enableAdForm ();
 
-initValidation();
+createMap ()
+  .then(({createMarkers, resetPosition, setUpMainMarkerMove}) => {
 
-enableFilterForm ();
+    initAdForm ({resetPosition, setUpMainMarkerMove});
+    enableAdForm ();
+
+    getData().then((offers) => {
+      createMarkers(offers.slice(0, SIMILAR_OFFERS_COUNT));
+
+      enableFilterForm ();
+    });
+  });
 
