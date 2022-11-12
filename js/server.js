@@ -9,9 +9,9 @@ function getData () {
       if (response.ok) {
         return response.json();
       }
-      showAlert('Не удалось загрузить данные. Попробуйте ещё разок');
-    }).catch(() => {
-      new Error('Data not correct');
+      throw new Error(`${response.status} ${response.statusText}`);
+    }).catch((err) => {
+      showAlert(`Не удалось загрузить данные ${err}`);
     });
 }
 
@@ -21,14 +21,7 @@ function sendData (formData) {
       method: 'POST',
       body: formData,
     },
-  ).then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-    showAlert('Не удалось отправить форму. Попробуйте ещё разок');
-  }).catch(() => {
-    new Error('Server is not responding');
-  });
+  );
 }
 
 export {getData, sendData};

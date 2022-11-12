@@ -1,12 +1,11 @@
-
 import {disableAdForm, disableFilterForm, enableAdForm, enableFilterForm} from './state.js';
-
 import {initAdForm} from './ad-form.js';
-
 import {createMap} from './map.js';
-
 import {getData} from './server.js';
+// import {debounce} from './debounce.js';
+// import './filter.js';
 
+// const TIMEOUT_DELAY = 500;
 const SIMILAR_OFFERS_COUNT = 10;
 
 disableAdForm ();

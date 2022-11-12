@@ -87,6 +87,10 @@ function createMap () {
           });
         }
 
+        function clearMarker () {
+          markerGroup.clearLayers();
+        }
+
         function resetPosition () {
           resetMainMarkerPosition();
 
@@ -104,7 +108,7 @@ function createMap () {
           _mainPinMapMoveHandler (...arg);
         }
 
-        resolve({createMarkers, resetPosition, setUpMainMarkerMove});
+        resolve({createMarkers, resetPosition, setUpMainMarkerMove, clearMarker});
       })
       .setView(INIT_MAP_POSITION, INIT_MAP_ZOOM);
   });

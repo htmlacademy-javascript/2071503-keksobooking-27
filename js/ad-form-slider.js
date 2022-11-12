@@ -33,6 +33,12 @@ function createSlider(typeHousing, checkValidation, TYPE_HOUSING_OPTIONS) {
     sliderElement.noUiSlider.set(value);
   }
 
+  function resetSliderValue (resetBtn) {
+    resetBtn.addEventListener ('click', () => {
+      sliderElement.noUiSlider.reset();
+    });
+  }
+
   // Изменение минимального значения слайдера
   typeHousing.addEventListener('change', (evt) => {
     if (evt.target.value === 'bungalow') {
@@ -82,7 +88,7 @@ function createSlider(typeHousing, checkValidation, TYPE_HOUSING_OPTIONS) {
     }
   });
 
-  return {setValue, setSlideEventInput};
+  return {setValue, setSlideEventInput, resetSliderValue};
 }
 
 
