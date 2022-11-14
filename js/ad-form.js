@@ -1,8 +1,8 @@
-import {createSlider} from './ad-form-slider.js';
+import {createSlider, successSendingSliderValue} from './ad-form-slider.js';
 import {sendData} from './server.js';
 import {TYPE_HOUSING_OPTIONS, ROOM_NUMBER_OPTIONS, ROUND_COORDINATE} from './const.js';
 import {getSuccessErrorMassage} from './success-error-massage.js';
-
+import {onAvatarChange, onImagesChange, resetPhotoPreview, successSendingPhoto} from './photo.js';
 
 const adForm = document.querySelector('.ad-form');
 const typeHousing = adForm.querySelector('[name="type"]');
@@ -34,8 +34,10 @@ function setUserFormSubmit ({pristine, reset}) {
       const formData = new FormData(evt.target);
 
       sendData(formData).then((data) => {
-        if (data) {
+        if (data.ok) {
           getSuccessMassage ();
+          successSendingPhoto ();
+          successSendingSliderValue ();
           reset ();
         } else {
           getErrorMassage ();
@@ -52,6 +54,12 @@ function initAdForm ({resetPosition, setUpMainMarkerMove}) {
     classTo: 'ad-form__element',
     errorTextParent: 'ad-form__element',
   });
+
+  /*-----------------------фото-------------------------*/
+  onAvatarChange (); // аватар пользователя
+  onImagesChange (); // фото жилья
+  resetPhotoPreview (adFormReset);
+  /*------------------------------------------------*/
 
   // количество комнат - жильцов
   const roomNumber = adForm.querySelector('[name="rooms"]');
@@ -106,9 +114,11 @@ function initAdForm ({resetPosition, setUpMainMarkerMove}) {
   });
 
   /*-----------------------слайдер-------------------------*/
-  const {setValue, setSlideEventInput} = createSlider (typeHousing, pristine.validate, TYPE_HOUSING_OPTIONS);
+  const {setValue, setSlideEventInput, resetSliderValue} = createSlider (typeHousing, pristine.validate, TYPE_HOUSING_OPTIONS);
 
   setSlideEventInput(price);
+
+  resetSliderValue(adFormReset);
 
   price.addEventListener ('change', () => {
     setValue (price.value);
@@ -137,5 +147,6 @@ function initAdForm ({resetPosition, setUpMainMarkerMove}) {
     reset ();
   });
 }
+
 
 export {initAdForm};

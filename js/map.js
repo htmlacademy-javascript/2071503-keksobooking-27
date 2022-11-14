@@ -87,6 +87,10 @@ function createMap () {
           });
         }
 
+        function clearMarkers () {
+          markerGroup.clearLayers();
+        }
+
         function resetPosition () {
           resetMainMarkerPosition();
 
@@ -104,7 +108,7 @@ function createMap () {
           _mainPinMapMoveHandler (...arg);
         }
 
-        resolve({createMarkers, resetPosition, setUpMainMarkerMove});
+        resolve({createMarkers, resetPosition, setUpMainMarkerMove, clearMarkers});
       })
       .setView(INIT_MAP_POSITION, INIT_MAP_ZOOM);
   });
@@ -112,13 +116,5 @@ function createMap () {
 
 
 export {createMap};
-/* Код для сортировки меток
-Button.addEventListener('click', () => {
-  markerGroup.clearLayers();
-  points.slice(points.length / 2).forEach((point) => {
-    createMarker(point);
-  });
-  Button.remove();
-});
-*/
+
 
