@@ -1,3 +1,4 @@
+import {debounce} from './debounce.js';
 const OFFERS_COUNT = 10;
 const DEFAULT_VALUE = 'any';
 const Price = {
@@ -12,7 +13,6 @@ const housingRooms = mapFilters.querySelector('#housing-rooms');
 const housingGuests = mapFilters.querySelector('#housing-guests');
 const featuresCheckboxes = mapFilters.querySelectorAll('.map__checkbox');
 
-const offers = [];
 
 function checkType (offer, type) {
   return type === DEFAULT_VALUE || offer.offer.type === type;
@@ -50,7 +50,7 @@ function checkFeatures (offer, features) {
   return features.every((feature) => offer.offer.features.includes(feature));
 }
 
-function getСheckedOffers () {
+function getСheckedOffers (offers) {
   const selectedType = housingType.value;
   const selectedPrice = housingPrice.value;
   const selectedRooms = housingRooms.value;
@@ -78,11 +78,16 @@ function getСheckedOffers () {
       checkedOffers.push(offer);
     }
   }
-  return {checkedOffers};
+  return checkedOffers;
 }
 
-function changeFilters (cb) {
-  mapFilters.addEventListener('change', cb(getСheckedOffers));
+function applyFilters (offers, after) {
+  after(offers);
+
+  mapFilters.addEventListener('change', debounce(() => {
+    const filteredOffers = getСheckedOffers(offers.slice());
+    after(filteredOffers);
+  }));
 }
 
-export {changeFilters};
+export {applyFilters};

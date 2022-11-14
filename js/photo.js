@@ -24,6 +24,7 @@ function onImagesChange () {
     const fileName = file.name.toLowerCase();
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
     if (matches) {
+      adFormPhotoBox.innerHTML = '';
       const image = document.createElement('img');
       image.src = URL.createObjectURL(file);
       image.style.maxWidth = '100%';
@@ -33,4 +34,16 @@ function onImagesChange () {
   });
 }
 
-export {onAvatarChange, onImagesChange};
+function resetPhotoPreview (resetBtn) {
+  resetBtn.addEventListener ('click', () => {
+    adFormPhotoBox.innerHTML = '';
+    avatarPreview.src = 'img/muffin-grey.svg';
+  });
+}
+
+function successSendingPhoto () {
+  adFormPhotoBox.innerHTML = '';
+  avatarPreview.src = 'img/muffin-grey.svg';
+}
+
+export {onAvatarChange, onImagesChange, resetPhotoPreview, successSendingPhoto};

@@ -39,6 +39,7 @@ function createSlider(typeHousing, checkValidation, TYPE_HOUSING_OPTIONS) {
     });
   }
 
+
   // Изменение минимального значения слайдера
   typeHousing.addEventListener('change', (evt) => {
     if (evt.target.value === 'bungalow') {
@@ -91,5 +92,8 @@ function createSlider(typeHousing, checkValidation, TYPE_HOUSING_OPTIONS) {
   return {setValue, setSlideEventInput, resetSliderValue};
 }
 
+function successSendingSliderValue () {
+  sliderElement.noUiSlider.reset();
+}
 
-export {createSlider};
+export {createSlider, successSendingSliderValue};
