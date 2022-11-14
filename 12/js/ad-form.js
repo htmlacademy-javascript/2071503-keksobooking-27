@@ -1,8 +1,8 @@
-import {createSlider} from './ad-form-slider.js';
+import {createSlider, successSendingSliderValue} from './ad-form-slider.js';
 import {sendData} from './server.js';
 import {TYPE_HOUSING_OPTIONS, ROOM_NUMBER_OPTIONS, ROUND_COORDINATE} from './const.js';
 import {getSuccessErrorMassage} from './success-error-massage.js';
-import {onAvatarChange, onImagesChange} from './avatar.js';
+import {onAvatarChange, onImagesChange, resetPhotoPreview, successSendingPhoto} from './photo.js';
 
 const adForm = document.querySelector('.ad-form');
 const typeHousing = adForm.querySelector('[name="type"]');
@@ -36,6 +36,8 @@ function setUserFormSubmit ({pristine, reset}) {
       sendData(formData).then((data) => {
         if (data.ok) {
           getSuccessMassage ();
+          successSendingPhoto ();
+          successSendingSliderValue ();
           reset ();
         } else {
           getErrorMassage ();
@@ -53,8 +55,11 @@ function initAdForm ({resetPosition, setUpMainMarkerMove}) {
     errorTextParent: 'ad-form__element',
   });
 
+  /*-----------------------фото-------------------------*/
   onAvatarChange (); // аватар пользователя
   onImagesChange (); // фото жилья
+  resetPhotoPreview (adFormReset);
+  /*------------------------------------------------*/
 
   // количество комнат - жильцов
   const roomNumber = adForm.querySelector('[name="rooms"]');

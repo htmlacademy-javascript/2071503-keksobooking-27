@@ -1,3 +1,5 @@
+import {TYPES_OF_HOUSING} from './const.js';
+
 const popupTemplateContent = document.querySelector('#card').content;
 const popupTemplate = popupTemplateContent.querySelector('.popup');
 
@@ -21,7 +23,7 @@ function createPopup (user) {
   searchVerificationContent ('.popup__title', user.offer.title);
   searchVerificationContent ('.popup__text--address', user.offer.address);
   searchVerificationContent ('.popup__text--price', user.offer.price ? `${user.offer.price} ₽/ночь` : null);
-  searchVerificationContent ('.popup__type', user.offer.type);
+  searchVerificationContent ('.popup__type', TYPES_OF_HOUSING[user.offer.type]);
 
   const capacity = popupTemplateClone.querySelector('.popup__text--capacity');
   capacity.textContent = `${user.offer.rooms} комнаты для ${user.offer.guests} гостей`;
