@@ -3,12 +3,11 @@ import {initAdForm} from './ad-form.js';
 import {createMap} from './map.js';
 import {getData} from './server.js';
 import {applyFilters} from './filter.js';
+import {SIMILAR_OFFERS_COUNT} from './const.js';
 
-const SIMILAR_OFFERS_COUNT = 10;
 
 disableAdForm ();
 disableFilterForm ();
-
 
 createMap ()
   .then(({clearMarkers, createMarkers, resetPosition, setUpMainMarkerMove}) => {

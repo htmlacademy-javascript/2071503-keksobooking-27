@@ -1,10 +1,10 @@
 import {TYPES_OF_HOUSING} from './const.js';
 
-const popupTemplateContent = document.querySelector('#card').content;
-const popupTemplate = popupTemplateContent.querySelector('.popup');
+const popupTemplate = document.querySelector('#card').content;
+const popupTemplateContent = popupTemplate.querySelector('.popup');
 
 function createPopup (user) {
-  const popupTemplateClone = popupTemplate.cloneNode(true);
+  const popupTemplateClone = popupTemplateContent.cloneNode(true);
 
   // Поиск и проверка элемента
   function searchVerificationContent (selector, text) {

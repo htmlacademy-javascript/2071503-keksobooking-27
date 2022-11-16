@@ -1,6 +1,5 @@
 import {debounce} from './debounce.js';
-const OFFERS_COUNT = 10;
-const DEFAULT_VALUE = 'any';
+import {OFFERS_COUNT, DEFAULT_VALUE} from './const.js';
 const Price = {
   MIDDLE : 10000,
   HIGH : 50000
