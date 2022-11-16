@@ -41,7 +41,6 @@ const SEND_DATA_URL = 'https://27.javascript.pages.academy/keksobooking';
 export {GET_DATA_URL, SEND_DATA_URL};
 
 // map.js
-
 const INIT_MAP_POSITION = {
   lat: 35.6895,
   lng: 139.692,
@@ -67,3 +66,14 @@ export {
   OTHER_ICON_SIZE,
   OTHER_ICON_ANHOR,
 };
+
+// filter.js
+const OFFERS_COUNT = 10;
+const DEFAULT_VALUE = 'any';
+
+export {OFFERS_COUNT, DEFAULT_VALUE};
+
+// main.js
+const SIMILAR_OFFERS_COUNT = 10;
+
+export {SIMILAR_OFFERS_COUNT};
