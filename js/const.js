@@ -67,3 +67,9 @@ export {
   OTHER_ICON_SIZE,
   OTHER_ICON_ANHOR,
 };
+
+// filter.js
+const OFFERS_COUNT = 10;
+const DEFAULT_VALUE = 'any';
+
+export {OFFERS_COUNT, DEFAULT_VALUE};
