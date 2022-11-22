@@ -73,3 +73,9 @@ const OFFERS_COUNT = 10;
 const DEFAULT_VALUE = 'any';
 
 export {OFFERS_COUNT, DEFAULT_VALUE};
+
+// ad-form-slider.js
+const STEP_COUNT = 1000;
+const MAX_COUNT_VALUE = 100000;
+
+export {STEP_COUNT, MAX_COUNT_VALUE};

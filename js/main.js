@@ -9,7 +9,6 @@ const SIMILAR_OFFERS_COUNT = 10;
 disableAdForm ();
 disableFilterForm ();
 
-
 createMap ()
   .then(({clearMarkers, createMarkers, resetPosition, setUpMainMarkerMove}) => {
 

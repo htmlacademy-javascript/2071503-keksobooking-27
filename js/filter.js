@@ -89,4 +89,14 @@ function applyFilters (offers, after) {
   }));
 }
 
-export {applyFilters};
+function successSendingFilter () {
+  housingType.value = DEFAULT_VALUE;
+  housingPrice.value = DEFAULT_VALUE;
+  housingRooms.value = DEFAULT_VALUE;
+  housingGuests.value = DEFAULT_VALUE;
+  featuresCheckboxes.forEach((featuresCheckbox) => {
+    featuresCheckbox.checked = false;
+  });
+}
+
+export {applyFilters, successSendingFilter};

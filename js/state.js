@@ -1,14 +1,14 @@
 const createForm = document.querySelector('.ad-form');
-const createFormElement = createForm.querySelectorAll('fieldset');
+const createFormFieldsets = createForm.querySelectorAll('fieldset');
 
 const filterForm = document.querySelector('.map__filters');
-const filterFormElement = filterForm.querySelectorAll('select, fieldset');
+const filterFormFieldsetandSelects = filterForm.querySelectorAll('select, fieldset');
 
 
 function disableAdForm () {
   createForm.classList.add('ad-form--disabled');
 
-  createFormElement.forEach((element) => {
+  createFormFieldsets.forEach((element) => {
     element.disabled = true;
   });
 }
@@ -16,7 +16,7 @@ function disableAdForm () {
 function disableFilterForm () {
   filterForm.classList.add('map__filters--disabled');
 
-  filterFormElement.forEach((element) => {
+  filterFormFieldsetandSelects.forEach((element) => {
     element.disabled = true;
   });
 }
@@ -25,7 +25,7 @@ function disableFilterForm () {
 function enableAdForm () {
   createForm.classList.remove('ad-form--disabled');
 
-  createFormElement.forEach((element) => {
+  createFormFieldsets.forEach((element) => {
     element.disabled = false;
   });
 }
@@ -33,7 +33,7 @@ function enableAdForm () {
 function enableFilterForm () {
   filterForm.classList.remove('map__filters--disabled');
 
-  filterFormElement.forEach((element) => {
+  filterFormFieldsetandSelects.forEach((element) => {
     element.disabled = false;
   });
 }

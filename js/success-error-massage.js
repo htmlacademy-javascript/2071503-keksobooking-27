@@ -3,7 +3,7 @@ import {ALERT_SHOW_TIME} from './const.js';
 const successTemplate = document.querySelector('#success').content;
 const successMassage = successTemplate.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content;
-const errorMassage = errorTemplate.querySelector('.success');
+const errorMassage = errorTemplate.querySelector('.error');
 
 function showAlert (message) {
   const alertContainer = document.createElement('div');
@@ -46,23 +46,38 @@ function getSuccessErrorMassage() {
     }
   }
 
-  function getSuccessMassage () {
+  function cbMassage (massage) {
+    return function() {
+      massage.remove();
+    };
+  }
+
+  const cbSuccessMassage = cbMassage (successMassage);
+  const cbErrorMassage = cbMassage (errorMassage);
+
+  function getModaltSuccessMassage () {
     document.body.append(successMassage);
     document.addEventListener('keydown', onSuccessMassageEscKeydown);
-    document.addEventListener('click', () => {
-      successMassage.remove();
-    });
+    document.addEventListener('click', cbSuccessMassage);
   }
 
-  function getErrorMassage () {
+  function removeModaltSuccessMassage () {
+    document.removeEventListener('keydown', onSuccessMassageEscKeydown);
+    document.removeEventListener('click', cbSuccessMassage);
+  }
+
+  function getModalErrorMassage () {
     document.body.append(errorMassage);
     document.addEventListener('keydown', onErrorMassageEscKeydown);
-    document.addEventListener('click', () => {
-      errorMassage.remove();
-    });
+    document.addEventListener('click', cbErrorMassage);
   }
 
-  return {getSuccessMassage, getErrorMassage};
+  function removeModaltErrorMassage () {
+    document.removeEventListener('keydown', onErrorMassageEscKeydown);
+    document.removeEventListener('click', cbErrorMassage);
+  }
+
+  return {getModaltSuccessMassage, getModalErrorMassage, removeModaltSuccessMassage, removeModaltErrorMassage};
 }
 
 export {showAlert, getSuccessErrorMassage};
