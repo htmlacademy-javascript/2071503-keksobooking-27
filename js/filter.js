@@ -80,16 +80,20 @@ function getСheckedOffers (offers) {
   return checkedOffers;
 }
 
+let render;
+
 function applyFilters (offers, after) {
-  after(offers);
+  render = () => after(offers);
 
   mapFilters.addEventListener('change', debounce(() => {
     const filteredOffers = getСheckedOffers(offers.slice());
     after(filteredOffers);
   }));
+
+  render ();
 }
 
-function successSendingFilter () {
+function resetFilters () {
   housingType.value = DEFAULT_VALUE;
   housingPrice.value = DEFAULT_VALUE;
   housingRooms.value = DEFAULT_VALUE;
@@ -97,6 +101,8 @@ function successSendingFilter () {
   featuresCheckboxes.forEach((featuresCheckbox) => {
     featuresCheckbox.checked = false;
   });
+
+  render?.();
 }
 
-export {applyFilters, successSendingFilter};
+export {applyFilters, resetFilters};
