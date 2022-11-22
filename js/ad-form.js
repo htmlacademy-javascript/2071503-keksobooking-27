@@ -10,7 +10,7 @@ const price = adForm.querySelector('[name="price"]');
 const address = document.querySelector('#address');
 const adFormReset = document.querySelector('.ad-form__reset');
 const adFormSubmit = adForm.querySelector('.ad-form__submit');
-const {getSuccessMassage, getErrorMassage} = getSuccessErrorMassage();
+const {getModaltSuccessMassage, getModalErrorMassage, removeModaltSuccessMassage, removeModaltErrorMassage} = getSuccessErrorMassage();
 
 // Отправка данных
 function setUserFormSubmit ({pristine, reset}) {
@@ -35,16 +35,16 @@ function setUserFormSubmit ({pristine, reset}) {
 
       sendData(formData).then((data) => {
         if (data.ok) {
-          getSuccessMassage ();
+          getModaltSuccessMassage ();
           successSendingPhoto ();
           successSendingSliderValue ();
           reset ();
         } else {
-          getErrorMassage ();
+          getModalErrorMassage ();
         }
       }).finally(() => {
         unblockSubmitButton ();
-      });
+      }).then(removeModaltSuccessMassage ()).then(removeModaltErrorMassage ());
     }
   });
 }
@@ -94,19 +94,19 @@ function initAdForm ({resetPosition, setUpMainMarkerMove}) {
 
 
   // Цена за жилье
-  function validatePrise (value) {
+  function validatePrice (value) {
     const cost = parseInt(value, 10);
     const minPrice = TYPE_HOUSING_OPTIONS[typeHousing.value] || 0;
 
     return cost && (cost >= minPrice);
   }
 
-  function getErrorMessagePrise () {
+  function getErrorMessagePrice () {
     const type = adForm.querySelector('[name="type"]');
     return `Выберете цену от ${TYPE_HOUSING_OPTIONS[type.value]} до 100000`;
   }
 
-  pristine.addValidator(price, validatePrise, getErrorMessagePrise);
+  pristine.addValidator(price, validatePrice, getErrorMessagePrice);
 
   typeHousing.addEventListener('change', () => {
     price.placeholder = TYPE_HOUSING_OPTIONS[typeHousing.value];

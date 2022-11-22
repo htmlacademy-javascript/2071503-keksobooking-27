@@ -1,5 +1,7 @@
 // Настройка карты leaflet
 import {createPopup} from './popup.js';
+
+
 import {
   INIT_MAP_POSITION,
   INIT_MAP_ZOOM,
@@ -10,7 +12,6 @@ import {
   OTHER_ICON_SIZE,
   OTHER_ICON_ANHOR,
 } from './const.js';
-
 
 // Отрисовка главной метки выбора адреса
 function createMainMarker ({moveHandler}) {
@@ -87,14 +88,20 @@ function createMap () {
           });
         }
 
+        function closePopup () {
+          map.closePopup();
+        }
+
         function clearMarkers () {
           markerGroup.clearLayers();
         }
 
         function resetPosition () {
           resetMainMarkerPosition();
+          closePopup ();
 
-          // Сбрасываем положение карты
+
+          // Сбрасывает положение карты
           map.setView(INIT_MAP_POSITION, INIT_MAP_ZOOM);
         }
 
@@ -113,7 +120,6 @@ function createMap () {
       .setView(INIT_MAP_POSITION, INIT_MAP_ZOOM);
   });
 }
-
 
 export {createMap};
 

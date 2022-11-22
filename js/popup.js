@@ -50,7 +50,7 @@ function createPopup (user) {
         featuresListItem.remove();
       }
     });
-  } else {popupFeaturesContainer.innerHTML = '';}
+  } else {popupFeaturesContainer.remove();}
 
   searchVerificationContent ('.popup__description', user.offer.description);
 
@@ -60,12 +60,14 @@ function createPopup (user) {
   const photoClone = imgContainer.querySelector('.popup__photo').cloneNode(true);
 
   imgContainer.innerHTML = '';
-
-  photos?.forEach((phohtoUrl) => {
-    const regularPhotoClone = photoClone.cloneNode(true);
-    regularPhotoClone.src = phohtoUrl;
-    imgContainer.appendChild(regularPhotoClone);
-  });
+  if (photos) {
+    photos?.forEach((phohtoUrl) => {
+      const regularPhotoClone = photoClone.cloneNode(true);
+      regularPhotoClone.src = phohtoUrl;
+      imgContainer.appendChild(regularPhotoClone);
+    });} else {
+    imgContainer.remove();
+  }
 
   return popupTemplateClone;
 }
