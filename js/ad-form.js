@@ -3,6 +3,7 @@ import {sendData} from './server.js';
 import {TYPE_HOUSING_OPTIONS, ROOM_NUMBER_OPTIONS, ROUND_COORDINATE} from './const.js';
 import {getSuccessErrorMassage} from './success-error-massage.js';
 import {onAvatarChange, onImagesChange, resetPhotoPreview, successSendingPhoto} from './photo.js';
+import {resetFilters} from './filter.js';
 
 const adForm = document.querySelector('.ad-form');
 const typeHousing = adForm.querySelector('[name="type"]');
@@ -139,6 +140,7 @@ function initAdForm ({resetPosition, setUpMainMarkerMove}) {
   function reset () {
     resetPosition();
     adForm.reset();
+    resetFilters();
   }
 
   setUserFormSubmit ({pristine, reset});
