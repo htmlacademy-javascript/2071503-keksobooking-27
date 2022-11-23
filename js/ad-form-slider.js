@@ -41,49 +41,13 @@ function createSlider(typeHousing, checkValidation, TYPE_HOUSING_OPTIONS) {
     });
   }
 
-
   // Изменение минимального значения слайдера
   typeHousing.addEventListener('change', (evt) => {
-    if (evt.target.value === 'bungalow') {
+    const type = evt.target.value;
+    if (TYPE_HOUSING_OPTIONS[type]) {
       adFormSlider.noUiSlider.updateOptions({
         range: {
-          min: TYPE_HOUSING_OPTIONS[Object.keys(TYPE_HOUSING_OPTIONS)[0]],
-          max: MAX_COUNT_VALUE,
-        },
-        step: STEP_COUNT,
-      });
-    }
-    if (evt.target.value === 'flat') {
-      adFormSlider.noUiSlider.updateOptions({
-        range: {
-          min: 1000,
-          max: MAX_COUNT_VALUE,
-        },
-        step: STEP_COUNT,
-      });
-    }
-    if (evt.target.value === 'hotel') {
-      adFormSlider.noUiSlider.updateOptions({
-        range: {
-          min: 3000,
-          max: MAX_COUNT_VALUE,
-        },
-        step: STEP_COUNT,
-      });
-    }
-    if (evt.target.value === 'house') {
-      adFormSlider.noUiSlider.updateOptions({
-        range: {
-          min: 5000,
-          max: MAX_COUNT_VALUE,
-        },
-        step: STEP_COUNT,
-      });
-    }
-    if (evt.target.value === 'palace') {
-      adFormSlider.noUiSlider.updateOptions({
-        range: {
-          min: 10000,
+          min: Number(TYPE_HOUSING_OPTIONS[type]),
           max: MAX_COUNT_VALUE,
         },
         step: STEP_COUNT,
